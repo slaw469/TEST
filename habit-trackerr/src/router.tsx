@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   createRouter,
   RouterProvider,
@@ -10,6 +9,9 @@ import {
 import HabitTracker from './routes/HabitTracker';
 import WelcomePage from './routes/WelcomePage';
 import Layout from './components/layout';
+import TimerPage from './routes/TimerPage';
+import CalendarPage from './routes/CalendarPage';
+import SettingsPage from './routes/SettingsPage';
 
 // Root route with no layout
 const rootRoute = createRootRoute({
@@ -45,23 +47,23 @@ const habitsRoute = createRoute({
   component: HabitTracker,
 });
 
-// Additional routes for sidebar navigation
+// Additional routes for sidebar navigation using the extracted components
 const timerRoute = createRoute({
   getParentRoute: () => authenticatedLayout,
   path: '/timer',
-  component: () => <div className="p-4"><h1 className="text-2xl font-bold">Timer Page</h1></div>,
+  component: TimerPage,
 });
 
 const calendarRoute = createRoute({
   getParentRoute: () => authenticatedLayout,
   path: '/calendar',
-  component: () => <div className="p-4"><h1 className="text-2xl font-bold">Calendar Page</h1></div>,
+  component: CalendarPage,
 });
 
 const settingsRoute = createRoute({
   getParentRoute: () => authenticatedLayout,
   path: '/settings',
-  component: () => <div className="p-4"><h1 className="text-2xl font-bold">Settings Page</h1></div>,
+  component: SettingsPage,
 });
 
 // Register the routes
@@ -81,7 +83,7 @@ export const router = createRouter({
   history: createBrowserHistory(),
 });
 
-// Don't forget to include a component to render the router
+// Main App component that renders the router
 export function App() {
   return <RouterProvider router={router} />;
 }
